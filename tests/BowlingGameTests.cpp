@@ -1,6 +1,8 @@
 #include "../BowlingGame.h"
 #include <gtest/gtest.h>
 
+using namespace BG;
+
 TEST(BowlingGameTest, TestInitialScore) {
     BowlingGame game("Player1");
     EXPECT_EQ(game.getFrame(0).score, 0);

@@ -3,34 +3,27 @@
 
 #include <vector>
 #include <string>
+#include "BowlingGameConstants.h"
+#include "BowlingFrame.h"
 
-constexpr int MAX_NUM_FRAMES = 10;
-constexpr int MAX_PINS = 10;
-
-struct Frame
+namespace BG
 {
-    unsigned int rollCount;
-    unsigned int score;
-    unsigned int numBonusRollsRemaining;
-    unsigned int sumOfRolls;
-};
+    class BowlingGame final
+    {
+    public:
+        BowlingGame(const std::string& inPlayerName);
+        void roll(int inPins);
+        inline int calculateFrameScore(unsigned int previousFrameScore, unsigned int sumOfCurrFrameRolls);
+        const Frame& getFrame(int idx)const;
+    private:
+        void fillFrame(int inPins);
+        void fillLastFrame(int inPins);
+        inline void updateFrame(unsigned int nxtRoll, unsigned int frameIndex);
 
-class BowlingGame final
-{
-public:
-    BowlingGame(const std::string& inPlayerName);
-    void roll(int inPins);
-    int calculateFrameScore(int previousFrameScore, int sumOfCurrFrameRolls);
-    const Frame& getFrame(int idx)const;
-private:
-    void BowlingGame::fillFrame(int inPins);
-    void BowlingGame::fillLastFrame(int inPins);
-    void updateFrame(unsigned int nxtRoll, unsigned int frameIndex);
-
-    Frame frames[MAX_NUM_FRAMES];
-    unsigned int frameCount;
-    int score;
-    std::string playerName;
-};
-
+        Frame frames[BowlingGameConstants::MAX_NUM_FRAMES];
+        unsigned int frameCount;
+        unsigned int score;
+        std::string playerName;
+    };
+} // namespace BG
 #endif // BOWLING_GAME_H

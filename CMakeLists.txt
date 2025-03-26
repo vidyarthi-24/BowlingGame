@@ -13,6 +13,8 @@ enable_testing()
 add_subdirectory(googletest)
 
 set(Headers
+    BowlingGameConstants.h
+    BowlingFrame.h
     BowlingGame.h
 )
 set(Sources
